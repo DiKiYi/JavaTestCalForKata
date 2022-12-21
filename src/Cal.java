@@ -1,8 +1,6 @@
 import java.util.Scanner;
 
 
-//Приветствую. Данный код зациклен и, вопреки заданию, при выявлении ошибкок (по крайней мере тех что я смог предугадать и контролировать)
-//не прерывается. коды с ошибками собраны в конце и их можно раскомментировать при необходимости
 
 public class Cal {
     static int num1;                    //использовался в первой, закомментированной версии кода
@@ -146,14 +144,14 @@ public class Cal {
                     if (i == 2) {                                                 // если числа при вводе были римские - шлёт в римский метод,
                         ansInPum(num1 + num2);
                     } else {                                                      //если арабские - выводит ответ
-                        System.out.println("ответ " + (num1 + num2));
+                        System.out.println(num1 + num2);
                     }
                     break;
                 case "minus":
                     if (i == 2) {
                         ansInPum(num1 - num2);
                     } else {
-                        System.out.println("ответ " + (num1 - num2));
+                        System.out.println(num1 - num2);
                     }
                     break;
                 case "del":
@@ -163,14 +161,14 @@ public class Cal {
                     if (i == 2) {
                         ansInPum(num1 / num2);
                     } else {
-                        System.out.println("ответ " + (num1 / num2));
+                        System.out.println(num1 / num2);
                     }
                     break;
                 case "mnog":
                     if (i == 2) {
                         ansInPum(num1 * num2);
                     } else {
-                        System.out.println("ответ " + (num1 * num2));
+                        System.out.println(num1 * num2);
                     }
                     break;
             }
@@ -227,46 +225,74 @@ public class Cal {
         }
     }
 
-    static void ansInPum(int ans) throws ContErr{
-        if (ans < 1) {                           //проверяет ответ римсцих на значение меньше единицы
+    static void ansInPum(int ans) throws ContErr {
+        if (ans < 1) {                           //проверяет ответ римских на значение меньше единицы
             negPum();
         }
-            switch (ans) {                             //ещё один большой костыль.
-                case 1:
-                    System.out.println("ответ I");
-                    break;
-                case 2:
-                    System.out.println("ответ II");
-                    break;
-                case 3:
-                    System.out.println("ответ III");
-                    break;
-                case 4:
-                    System.out.println("ответ IV");
-                    break;
-                case 5:
-                    System.out.println("ответ V");
-                    break;
-                case 6:
-                    System.out.println("ответ VI");
-                    break;
-                case 7:
-                    System.out.println("ответ VII");
-                    break;
-                case 8:
-                    System.out.println("ответ VIII");
-                    break;
-                case 9:
-                    System.out.println("ответ IX");
-                    break;
-                case 10:
-                    System.out.println("ответ X");
-                    break;
-                default:
-                    System.out.println("ответ - больше X");
-                    break;
-            }
+        if (ans==100){
+            System.out.println("C");
+            toBegin();
+        }
+        int edin = ans % 10;
+        String ans1 = getEdinInPum(edin);
+        int ans10 = (ans-edin)/10;
+        switch (ans10){
+            case 0:
+                System.out.println(ans1);
+                break;
+            case 1:
+                System.out.println("X"+ans1);
+                break;
+            case 2:
+                System.out.println("XX"+ans1);
+                break;
+            case 3:
+                System.out.println("XXX"+ans1);
+                break;
+            case 4:
+                System.out.println("XL"+ans1);
+                break;
+            case 5:
+                System.out.println("L"+ans1);
+                break;
+            case 6:
+                System.out.println("LX"+ans1);
+                break;
+            case 7:
+                System.out.println("LXX"+ans1);
+                break;
+            case 8:
+                System.out.println("LXXX"+ans1);
+                break;
+            case 9:
+                System.out.println("XC"+ans1);
+                break;
+        }
     }
+
+        static String getEdinInPum(int ed) {
+            switch (ed) {                             //ещё один большой костыль.
+                case 1:
+                    return "I";
+                case 2:
+                    return "II";
+                case 3:
+                    return "III";
+                case 4:
+                    return "IV";
+                case 5:
+                    return "V";
+                case 6:
+                    return "VI";
+                case 7:
+                    return "VII";
+                case 8:
+                    return "VIII";
+                case 9:
+                    return "IX";
+            }
+            return "";
+        }
 
     static int whereOpCheck(int indexCheck) throws ContErr{                          //проверяет местоположение символа по индексу на отредактированном вводе
         int check = enterOperationUnneg.indexOf(indexCheck);
@@ -289,45 +315,45 @@ public class Cal {
     }
 
     static void negPum() throws ContErr{
-//        throw new ContErr("//т.к. в римской системе нет отрицательных чисел");
-        System.out.println("throws Exception //т.к. в римской системе нет отрицательных чисел");
-        toBegin();
+        throw new ContErr("//т.к. в римской системе нет отрицательных чисел");
+//        System.out.println("throws Exception //т.к. в римской системе нет отрицательных чисел");
+//        toBegin();
 
     }
 
     static void brLotO() throws ContErr{
-//        throw new ContErr("//т.к. формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
-        System.out.println("throws Exception //т.к. формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
-        toBegin();
+        throw new ContErr("//т.к. формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
+//        System.out.println("throws Exception //т.к. формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
+//        toBegin();
     }
 
     static void noMath() throws ContErr{
-//        throw new ContErr("//т.к. строка не является математической операцией");
-        System.out.println("throws Exception //т.к. строка не является математической операцией");
-        toBegin();
+        throw new ContErr("//т.к. строка не является математической операцией");
+//        System.out.println("throws Exception //т.к. строка не является математической операцией");
+//        toBegin();
     }
 
     static void arAndRum() throws ContErr{
-//        throw new ContErr("//т.к. используются одновременно разные системы счисления");
-        System.out.println("throws Exception //т.к. используются одновременно разные системы счисления");
-        toBegin();
+        throw new ContErr("//т.к. используются одновременно разные системы счисления");
+//        System.out.println("throws Exception //т.к. используются одновременно разные системы счисления");
+//        toBegin();
     }
 
     static void moreDiap() throws ContErr{
-//        throw new ContErr("//т.к. число не соответстует требованиям от -10 до 10");
-        System.out.println("throws Exception //т.к. число не соответстует требованиям от -10 до 10");
-        toBegin();
+        throw new ContErr("//т.к. число не соответстует требованиям от -10 до 10");
+//        System.out.println("throws Exception //т.к. число не соответстует требованиям от -10 до 10");
+//        toBegin();
     }
 
     static void delZero() throws ContErr{
-//        throw new ContErr("//т.к.нельзя делить на 0");
-        System.out.println("throws Exception //т.к.нельзя делить на 0");
-        toBegin();
+        throw new ContErr("//т.к.нельзя делить на 0");
+//        System.out.println("throws Exception //т.к.нельзя делить на 0");
+//        toBegin();
     }
 
     static void unnownNum() throws ContErr{
-//        throw new ContErr("//т.к. как минимум одно неизвестное число");
-        System.out.println("throws Exception //т.к. как минимум одно неизвестное число");
-        toBegin();
+        throw new ContErr("//т.к. как минимум одно неизвестное число");
+//        System.out.println("throws Exception //т.к. как минимум одно неизвестное число");
+//        toBegin();
         }
     }
